@@ -11,6 +11,12 @@ const Btn = styled.button`
     color: ${colorPalette.white};
     background: ${colorPalette.buttonlink};
     border: 2px solid transparent;
+    cursor: pointer;
+    &:hover,
+    &:focus-visible {
+      background: ${colorPalette.orange};
+    }
+
 `
 
 export const SubmitBtn = ({ text }: { text: string }) => {

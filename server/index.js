@@ -73,11 +73,10 @@ server.post('/api/auth/login', async (req, res) => {
 
     if((username && password) || (email && password)) {
         const isThereAuser = await mongoClient.db("userdata").collection("users").findOne({"$or": [{ username: username, password: password }, {email: email, password: password}]});
-        console.log(isThereAuser);
         if(!isThereAuser) return res.sendStatus(401);
         return res.status(200).json(isThereAuser);
     } else {
-        console.log('issue on line 75');
+        console.log('issue on line 74');
         return res.sendStatus(400);
     }
 })

@@ -4,6 +4,7 @@ import { InputandLabel } from "../../components/form-components/InputandLabel"
 import { fontStack } from "../../styles/fontStack"
 import { SubmitBtn } from "../../components/form-components/SubmitBtn"
 import { Link } from "react-router"
+import service from "../../service/service"
 
 const FormLoginContainer = styled.div`
   background: #22C1C3;
@@ -45,9 +46,17 @@ export const Login = () => {
     }
   };
 
-  const formData = (e:SubmitEvent) => {
+  const formData = async (e:SubmitEvent) => {
     e.preventDefault();
-    console.log(loginData);
+    const isThereAUser = await service('http://localhost:7575/api/auth/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify(loginData)
+    });
+    console.log(isThereAUser);
     /*if (authenticationSuccessful) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
       navigate(from, { replace: true });
