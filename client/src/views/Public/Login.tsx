@@ -38,16 +38,17 @@ const StyledLink = styled(Link)`
 `
 
 export const Login = () => {
-  const [loginData, setLoginData] = useState({user:null, password:null})
+  const [loginData, setLoginData] = useState({username:null, password:null})
 
   const handleInputChange = (name: string | null, value: string | null) => {
     if (name) {
-      setLoginData(prev => ({ ...prev, [name]: value }));
+      setLoginData(prev => ({ ...prev, [name]: value?.trim() }));
     }
   };
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
+    console.log(loginData)
     const isThereAUser = await service('http://localhost:7575/api/auth/login', {
       method: 'post',
       headers: {
@@ -66,7 +67,7 @@ export const Login = () => {
     <FormLoginContainer>
       <Heading>Login</Heading>
       <FormLogin onSubmit={formData}  action="">
-        <InputandLabel label={"UserName or Email"} inputType={"text"} name={"user"} fn={handleInputChange} isRequired={true} />
+        <InputandLabel label={"UserName or Email"} inputType={"text"} name={"username"} fn={handleInputChange} isRequired={true} />
         <InputandLabel label={"Password"} inputType={"password"} name={"password"} fn={handleInputChange} isRequired={true} />
         <SubmitBtn text={"Submit"} />
         <Para><StyledLink to="/create-user">Create User</StyledLink></Para>
