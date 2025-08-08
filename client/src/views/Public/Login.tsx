@@ -5,6 +5,7 @@ import { fontStack } from "../../styles/fontStack"
 import { SubmitBtn } from "../../components/form-components/SubmitBtn"
 import { Link } from "react-router"
 import service from "../../service/service"
+import { useDispatch, useSelector } from "react-redux"
 
 const FormLoginContainer = styled.div`
   background: #22C1C3;
@@ -39,6 +40,10 @@ const StyledLink = styled(Link)`
 
 export const Login = () => {
   const [loginData, setLoginData] = useState({username:null, password:null})
+  const dispatch = useDispatch();
+  const isLogged = useSelector(store => store.auth.isLogged);
+  console.log(isLogged)
+  // dispatch + action
 
   const handleInputChange = (name: string | null, value: string | null) => {
     if (name) {
