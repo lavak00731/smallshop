@@ -3,9 +3,9 @@ import styled from "styled-components"
 import { InputandLabel } from "../../components/form-components/InputandLabel"
 import { fontStack } from "../../styles/fontStack"
 import { SubmitBtn } from "../../components/form-components/SubmitBtn"
-import { Link } from "react-router"
+import { Link, useNavigate, useLocation } from "react-router"
 import service from "../../service/service"
-import { useDispatch, useSelector } from "react-redux"
+//import { useDispatch, useSelector } from "react-redux"
 
 const FormLoginContainer = styled.div`
   background: #22C1C3;
@@ -40,10 +40,12 @@ const StyledLink = styled(Link)`
 
 export const Login = () => {
   const [loginData, setLoginData] = useState({username:null, password:null})
-  const dispatch = useDispatch();
-  const isLogged = useSelector(store => store.auth.isLogged);
-  console.log(isLogged)
+  //const dispatch = useDispatch();
+ // const isLogged = useSelector(store => store.auth.isLogged);
+  //console.log(isLogged)
   // dispatch + action
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleInputChange = (name: string | null, value: string | null) => {
     if (name) {
@@ -53,7 +55,6 @@ export const Login = () => {
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
-    console.log(loginData)
     const isThereAUser = await service('http://localhost:7575/api/auth/login', {
       method: 'post',
       headers: {
@@ -63,10 +64,11 @@ export const Login = () => {
       body: JSON.stringify(loginData)
     });
     console.log(isThereAUser);
-    /*if (authenticationSuccessful) {
+    if (isThereAUser !== null) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
+      sessionStorage.setItem('user', 'true');
       navigate(from, { replace: true });
-    }*/
+    }
   }
   return (
     <FormLoginContainer>
