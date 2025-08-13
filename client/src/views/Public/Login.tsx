@@ -55,7 +55,7 @@ export const Login = () => {
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
-    const isThereAUser = await service('http://localhost:7575/api/auth/login', {
+    const user = await service('http://localhost:7575/api/auth/login', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -63,10 +63,10 @@ export const Login = () => {
       },
       body: JSON.stringify(loginData)
     });
-    console.log(isThereAUser);
-    if (isThereAUser !== null) {
+    console.log(user);
+    if (user) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
-      sessionStorage.setItem('user', 'true');
+      localStorage.setItem('user', JSON.stringify(user));
       navigate(from, { replace: true });
     }
   }

@@ -1,11 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const server = express();
+const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
+const dotenv = require('dotenv');
 
+dotenv.config()
+
+const server = express();
 server.use(express.json()); // req.body
 server.use(cors());
-const mongoClient = new MongoClient('mongodb+srv://eolavaca:10mmglock@smalldb.mjjubq7.mongodb.net/?retryWrites=true&w=majority&appName=smalldb');
+const mongoClient = new MongoClient(`mongodb+srv://${process.env.USER_DB}:${process.env.USER_PASSWORD}@smalldb.mjjubq7.mongodb.net/?retryWrites=true&w=majority&appName=smalldb`);
 
 mongoClient.connect();
 
@@ -57,16 +61,29 @@ server.post('/api/auth/login', async (req, res) => {
     const { username, password } = req.body;
     if((username && password)) {
         const query = emailRegex.test(username) ? {email: username, password: password} : {username: username, password: password} 
-        const isThereAuser = await mongoClient.db("userdata").collection("users").findOne(query);
-        if(!isThereAuser) return res.sendStatus(401);
-        return res.status(200).json(isThereAuser);
+        const user = await mongoClient.db("userdata").collection("users").findOne(query);
+
+        if(!user) return res.sendStatus(401);
+
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+        
+        return res.status(200).json(token); // Enviar token
     } else {
         console.log('issue on line 61');
         return res.sendStatus(400);
     }
 })
 
+server.get("/api/auth/verify", () => {
+    try {
+        const content = jwt.verify(token, 'cat123'); // Cambiar por variable de entorno 
 
+    } catch(err) {
+
+    }
+})
+
+// [nodemon] watching extensions: js,mjs,cjs,json, .env
 
 server.listen(7575, () => { console.log('Server Working at 7575') })
 
