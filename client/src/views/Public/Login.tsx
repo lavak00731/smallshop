@@ -5,7 +5,8 @@ import { fontStack } from "../../styles/fontStack"
 import { SubmitBtn } from "../../components/form-components/SubmitBtn"
 import { Link, useNavigate, useLocation } from "react-router"
 import service from "../../service/service"
-//import { useDispatch, useSelector } from "react-redux"
+import { login } from "../../features/authSlice"
+import { useDispatch, useSelector } from "react-redux"
 
 const FormLoginContainer = styled.div`
   background: #22C1C3;
@@ -37,13 +38,24 @@ const Para = styled.p`
 const StyledLink = styled(Link)`
   color: #FFF;
 `
+const ErrorBanner = styled.p`
+  background: #bd2222ff;
+  color: #FFF;
+  color: font-family: ${fontStack.text};
+  font-size: 1rem;
+  line-height: 1.25px;
+  font-weight: 700;
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+`
 
 export const Login = () => {
-  const [loginData, setLoginData] = useState({username:null, password:null})
-  //const dispatch = useDispatch();
- // const isLogged = useSelector(store => store.auth.isLogged);
-  //console.log(isLogged)
-  // dispatch + action
+  const [loginData, setLoginData] = useState({username:null, password:null});
+  const [hasErrorAtLogin, sethasErrorAtLogin] = useState(false)
+  const dispatch = useDispatch();
+  //const isLogged = useSelector(store => store.auth.isLogged);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -63,20 +75,25 @@ export const Login = () => {
       },
       body: JSON.stringify(loginData)
     });
-    console.log(user);
     if (user) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
       localStorage.setItem('user', JSON.stringify(user));
+      dispatch(login(true));
+      sethasErrorAtLogin(false);
       navigate(from, { replace: true });
+    } else {
+      sethasErrorAtLogin(true);
+      dispatch(login(false))
     }
   }
   return (
     <FormLoginContainer>
-      <Heading>Login</Heading>
+      <Heading>Login</Heading>      
       <FormLogin onSubmit={formData}  action="">
+        {hasErrorAtLogin ? <ErrorBanner aria-live="polite">UserName or Password is wrong</ErrorBanner> : null}
         <InputandLabel label={"UserName or Email"} inputType={"text"} name={"username"} fn={handleInputChange} isRequired={true} />
         <InputandLabel label={"Password"} inputType={"password"} name={"password"} fn={handleInputChange} isRequired={true} />
-        <SubmitBtn text={"Submit"} />
+        <SubmitBtn text={"Login"} />
         <Para><StyledLink to="/create-user">Create User</StyledLink></Para>
       </FormLogin>
     </FormLoginContainer>
