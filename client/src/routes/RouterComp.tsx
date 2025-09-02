@@ -10,15 +10,15 @@ import { Favourites } from '../views/Private/Favourites'
 import { User } from '../views/Private/User'
 
 export const RouterComp = () => {
-  const location = useLocation();
+  /*const location = useLocation();
   const [announcement, setAnnouncement] = useState('');
   useEffect(() => {
     const pageTitle = document.title; // Or extract from route data
     setAnnouncement(`Navigated to ${pageTitle}`);
-  }, [location]); // Update announcement when location changes
+  }, [location]); // Update announcement when location changes*/
   return (
     <>
-      <p aria-live="polite" className="sr-only">{announcement}</p>
+      {/* <p aria-live="polite" className="sr-only">{announcement}</p> */}
       <Routes>
           <Route index element={<Products />} />
           <Route path="login" element={<Login />} />

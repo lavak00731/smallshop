@@ -77,6 +77,9 @@ export const Login = () => {
       },
       body: JSON.stringify(loginData)
     });
+
+    console.log("user", user);
+
     if (user) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
       localStorage.setItem('user', JSON.stringify(user));

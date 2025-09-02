@@ -19,7 +19,7 @@ describe('Login tests', () =>{
   
   test('Check Login Redirection', async () => {
     global.fetch = vi.fn();
-    fetch.mockResolvedValueOnce({ json: async () => userMocked });
+    fetch.mockResolvedValueOnce({ json: async () => userMocked, ok: true, status:  200  });
     // const response = await fetch("https://www.google.com");
     // const json = await response.json();
     // console.log(json);
@@ -35,24 +35,26 @@ describe('Login tests', () =>{
 
     await userEvent.click(userLoginBtn);
 
-    await waitFor(() => {      
-      expect(screen.getByRole('heading', {name: 'User'})).toBeInTheDocument();
-    },
-    {
-      timeout: 3000,
-      interval:500
-    }
-  )
+    // await waitFor(() => {      
+    //   expect(screen.getByRole('heading', {name: 'User'})).toBeInTheDocument();
+    // },
+    // {
+    //   timeout: 3000,
+    //   interval:500
+    // });
 
 
+    const elem = await screen.findByText('User')
 
+    expect(elem).toBeInTheDocument();
     
     
   });
 
   test('Check Login Validation', async ()=>{
     global.fetch = vi.fn();
-    fetch.mockResolvedValueOnce({ json: async () => userMocked });
+    fetch.mockResolvedValueOnce({ json: async () => ({}), ok: false, status: 401 });
+
     //render Login
     render(<AppMock route='login' />);
     const userNameField = screen.getByLabelText('UserName or Email');

@@ -1,6 +1,8 @@
 const service = async (url: string, options: object = {}) => {
     try {
         const response = await fetch(url, { ...options });
+        console.log("mocked response", response);
+
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
