@@ -1,6 +1,13 @@
+import { MainLayout } from "../../layouts/MainLayout"
 
 export const Products = () => {
   return (
-    <div>Products</div>
+    <MainLayout>
+      <article>
+        <h1 id="mainHeading">Products</h1>
+
+      </article>
+    </MainLayout>
+    
   )
 }
