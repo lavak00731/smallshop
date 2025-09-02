@@ -6,7 +6,8 @@ import { SubmitBtn } from "../../components/form-components/SubmitBtn"
 import { Link, useNavigate, useLocation } from "react-router"
 import service from "../../service/service"
 import { login } from "../../features/authSlice"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch} from "react-redux"
+import ChangePageTitle  from "../../hooks/ChangePageTitle"
 
 const FormLoginContainer = styled.div`
   background: #22C1C3;
@@ -64,6 +65,7 @@ export const Login = () => {
       setLoginData(prev => ({ ...prev, [name]: value?.trim() }));
     }
   };
+  ChangePageTitle({pageTitle: 'Login - SmallShop'});
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
