@@ -7,7 +7,7 @@ export const Auth = () => {
   const location = useLocation();
   const [isTokenVerified, setisTokenVerified] = useState(false)
 
-  /*const tokenVerification = async() => {
+  const tokenVerification = async () => {
     const tokenVerified = await service("http://localhost:7575/api/auth/verify",{
       method: 'post',
       headers: {
@@ -16,18 +16,17 @@ export const Auth = () => {
       },
       body: JSON.stringify(token)
     })
+    console.log('token verification',tokenVerification)
     setisTokenVerified(tokenVerified)
   }
   
   useEffect(() => {
     tokenVerification()
-    console.log(isTokenVerified)
-  }, [])*/
-  
-  return <Outlet />;
+  }, [])
 
-  // if(isTokenVerified) {
-  // }
+   if(isTokenVerified) {
+    return <Outlet />;
+   }
 
-  // return <Navigate to="/login" state={{ from: location }} replace />;
+  return <Navigate to="/login" state={{ from: location }} replace />;
 }

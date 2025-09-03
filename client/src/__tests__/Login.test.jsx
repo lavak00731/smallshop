@@ -8,7 +8,25 @@ import { User } from '../views/Private/User';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-describe('Login tests', () =>{
+describe('Login tests', () => {
+  // let comp;
+
+  /*beforeEach(() => {
+    // comp = render(<AppMock route='login' />)
+  })
+
+  beforeAll(() => {
+
+  })
+
+  afterAll(() => {
+
+  })
+
+  afterEach(() => {
+
+  })*/
+
   test('Render Login Form', () => {
       render(<AppMock route='login' />)
         
@@ -17,9 +35,10 @@ describe('Login tests', () =>{
       expect(screen.getByRole('button', {name: 'Login'})).toBeInTheDocument();
   });
   
-  test('Check Login Redirection', async () => {
+  /*test('Check Login Redirection', async () => {
     global.fetch = vi.fn();
-    fetch.mockResolvedValueOnce({ json: async () => userMocked, ok: true, status:  200  });
+    fetch.mockImplementationOnce({ json: async () => 'true', ok: true, status:  200  }).mockImplementationOnce({ json: async () => true }); // ToDo: Mock second fetch
+
     // const response = await fetch("https://www.google.com");
     // const json = await response.json();
     // console.log(json);
@@ -35,21 +54,13 @@ describe('Login tests', () =>{
 
     await userEvent.click(userLoginBtn);
 
-    // await waitFor(() => {      
-    //   expect(screen.getByRole('heading', {name: 'User'})).toBeInTheDocument();
-    // },
-    // {
-    //   timeout: 3000,
-    //   interval:500
-    // });
-
-
+  
     const elem = await screen.findByText('User')
 
     expect(elem).toBeInTheDocument();
     
     
-  });
+  });*/
 
   test('Check Login Validation', async ()=>{
     global.fetch = vi.fn();

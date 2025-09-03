@@ -65,7 +65,7 @@ export const Login = () => {
       setLoginData(prev => ({ ...prev, [name]: value?.trim() }));
     }
   };
-  ChangePageTitle({pageTitle: 'Login - SmallShop'});
+  //ChangePageTitle({pageTitle: 'Login - SmallShop'});
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
@@ -77,7 +77,6 @@ export const Login = () => {
       },
       body: JSON.stringify(loginData)
     });
-
     console.log("user", user);
 
     if (user) {
