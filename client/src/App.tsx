@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import { RouterComp } from './routes/RouterComp';
 import './App.css'
 

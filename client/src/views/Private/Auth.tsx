@@ -1,32 +1,14 @@
-import { Navigate, Outlet, useLocation } from "react-router";
-import service from "../../service/service";
-import { useEffect, useState } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-export const Auth = () => {
-  const token = localStorage.getItem('user');
+
+export const Auth = ({isTokenVerified}:{isTokenVerified: boolean}) => {
+  console.log("Auth component rendered");
   const location = useLocation();
-  const [isTokenVerified, setisTokenVerified] = useState(false)
-
-  const tokenVerification = async () => {
-    const tokenVerified = await service("http://localhost:7575/api/auth/verify",{
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify(token)
-    })
-    console.log('token verification',tokenVerification)
-    setisTokenVerified(tokenVerified)
-  }
-  
-  useEffect(() => {
-    tokenVerification()
-  }, [])
-
+  console.log('istoken', isTokenVerified)
    if(isTokenVerified) {
-    return <Outlet />;
-   }
-
-  return <Navigate to="/login" state={{ from: location }} replace />;
+     return <Outlet />;
+    }
+    
+    return <Navigate to="/login" state={{ from: location }} replace />;
+    
 }

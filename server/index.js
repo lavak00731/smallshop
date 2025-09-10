@@ -74,16 +74,16 @@ server.post('/api/auth/login', async (req, res) => {
     }
 })
 
-server.get("/api/auth/verify", async (req, res) => {
-    console.log(req.body)
-    /*const { token } = req.body;
+server.post("/api/auth/verify", async (req, res) => {
+    const { token } = req.body; // { token: ... }  console.log('token', token)
+    
     try {
         const content = jwt.verify(token, process.env.JWT_SECRET_KEY); // Cambiar por variable de entorno 
-        console.log(content)
-        content? res.sendStatus(200) : res.sendStatus(401);
+        content ? res.status(200).json({valid: true}) : res.status(401).json({valid: false});
     } catch(err) {
-        console.log(err)
-    }*/
+       console.log(err);
+        res.status(401).json({ valid: false });
+    }
 })
 
 // [nodemon] watching extensions: js,mjs,cjs,json, .env

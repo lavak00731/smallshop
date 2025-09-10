@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { InputandLabel } from "../../components/form-components/InputandLabel"
 import { fontStack } from "../../styles/fontStack"
 import { SubmitBtn } from "../../components/form-components/SubmitBtn"
-import { Link, useNavigate, useLocation } from "react-router"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import service from "../../service/service"
 import { login } from "../../features/authSlice"
 import { useDispatch} from "react-redux"
@@ -65,7 +65,7 @@ export const Login = () => {
       setLoginData(prev => ({ ...prev, [name]: value?.trim() }));
     }
   };
-  //ChangePageTitle({pageTitle: 'Login - SmallShop'});
+  ChangePageTitle({pageTitle: 'Login - SmallShop'});
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
@@ -77,11 +77,9 @@ export const Login = () => {
       },
       body: JSON.stringify(loginData)
     });
-    console.log("user", user);
-
     if (user) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', user);
       dispatch(login(true));
       sethasErrorAtLogin(false);
       navigate(from, { replace: true });
@@ -90,6 +88,8 @@ export const Login = () => {
       dispatch(login(false))
     }
   }
+ 
+  
   return (
     <FormLoginContainer>
       <Heading>Login</Heading>      

@@ -1,4 +1,3 @@
-import React from 'react';
 import {render, screen, waitFor } from '@testing-library/react';
 import {expect, test} from 'vitest';
 import userMocked from './mocks/userMocked';
@@ -35,13 +34,14 @@ describe('Login tests', () => {
       expect(screen.getByRole('button', {name: 'Login'})).toBeInTheDocument();
   });
   
-  /*test('Check Login Redirection', async () => {
-    global.fetch = vi.fn();
-    fetch.mockImplementationOnce({ json: async () => 'true', ok: true, status:  200  }).mockImplementationOnce({ json: async () => true }); // ToDo: Mock second fetch
+  test('Check Login Redirection', async () => {
+   /* global.fetch = vi.fn();
+    fetch.mockImplementationOnce({ json: async () => 'true', ok: true, status:  200  }).mockImplementationOnce({ json: async () => true }); // ToDo: Mock second fetch*/
 
     // const response = await fetch("https://www.google.com");
     // const json = await response.json();
     // console.log(json);
+    
 
     //render Login
     render(<AppMock route='login' />)
@@ -60,7 +60,7 @@ describe('Login tests', () => {
     expect(elem).toBeInTheDocument();
     
     
-  });*/
+  });
 
   test('Check Login Validation', async ()=>{
     global.fetch = vi.fn();
