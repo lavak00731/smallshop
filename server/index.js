@@ -76,7 +76,7 @@ server.post('/api/auth/login', async (req, res) => {
 
 server.post("/api/auth/verify", async (req, res) => {
     const { token } = req.body; // { token: ... }  console.log('token', token)
-    
+    console.log(token)
     try {
         const content = jwt.verify(token, process.env.JWT_SECRET_KEY); // Cambiar por variable de entorno 
         content ? res.status(200).json({valid: true}) : res.status(401).json({valid: false});

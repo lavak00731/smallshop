@@ -19,6 +19,5 @@ export const media = {
   md: `@media (min-width: ${breakpoints.md}px)`,
   lg: `@media (min-width: ${breakpoints.lg}px)`,
   xl: `@media (min-width: ${breakpoints.xl}px)`,
-  xxl: `@media (min-width: ${breakpoints.xxl}px)`
-  
+  xxl: `@media (min-width: ${breakpoints.xxl}px)`  
 };

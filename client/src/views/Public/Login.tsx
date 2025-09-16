@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import { InputandLabel } from "../../components/form-components/InputandLabel"
 import { fontStack } from "../../styles/fontStack"
@@ -55,7 +55,6 @@ export const Login = () => {
   const [loginData, setLoginData] = useState({username:null, password:null});
   const [hasErrorAtLogin, sethasErrorAtLogin] = useState(false)
   const dispatch = useDispatch();
-  //const isLogged = useSelector(store => store.auth.isLogged);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -80,7 +79,7 @@ export const Login = () => {
     if (user) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
       localStorage.setItem('user', user);
-      dispatch(login(true));
+      dispatch(login({isLogged: true, userName: loginData.username }));
       sethasErrorAtLogin(false);
       navigate(from, { replace: true });
     } else {
