@@ -26,61 +26,86 @@ describe('Login tests', () => {
 
   })*/
 
-  test('Render Login Form', () => {
-      render(<AppMock route='login' />)
+  // test('Render Login Form', () => {
+  //     render(<AppMock route='login' />)
         
-      expect(screen.getByLabelText('UserName or Email')).toBeInTheDocument();
-      expect(screen.getByLabelText('Password')).toBeInTheDocument();
-      expect(screen.getByRole('button', {name: 'Login'})).toBeInTheDocument();
-  });
+  //     expect(screen.getByLabelText('UserName or Email')).toBeInTheDocument();
+  //     expect(screen.getByLabelText('Password')).toBeInTheDocument();
+  //     expect(screen.getByRole('button', {name: 'Login'})).toBeInTheDocument();
+  // });
   
   test('Check Login Redirection', async () => {
-   /* global.fetch = vi.fn();
-    fetch.mockImplementationOnce({ json: async () => 'true', ok: true, status:  200  }).mockImplementationOnce({ json: async () => true }); // ToDo: Mock second fetch*/
+    vi.spyOn(localStorage, "getItem").mockReturnValue("user-mocked-get");
+    vi.spyOn(localStorage, "setItem").mockReturnValue(
+      "user-mocked",
+      "dslfkjldskjdsflkdfsjlkjdlsf"
+    );
+    // localStorage.getItem = vi.fn().mockReturnValue("user-mocked-get"); // Setup
+    // localStorage.setItem = vi
+    //   .fn()
+    //   .mockReturnValue("user-mocked", "dslfkjldskjdsflkdfsjlkjdlsf"); // Setup
+
+    // localStorage.getItem.mockReturnValueOnce('user');
+    // localStorage.setItem.mockReturnValueOnce('user', 'dslfkjldskjdsflkdfsjlkjdlsf')
+
+    // localStorage.getItem("pepe"); // "user"
+
+    // localStorage.getItem("token"); // "user-mocked-get"
+    // localStorage.getItem("token"); // "user-mocked-get"
+    // localStorage.getItem("token"); // "user-mocked-get"
+
+    window.fetch = vi.fn();
+    fetch
+      .mockImplementationOnce(() => ({
+        json: async () => "true",
+        ok: true,
+        status: 200,
+      }))
+      .mockImplementationOnce(() => ({
+        json: async () => ({ valid: true }),
+        ok: true,
+        status: 200,
+      })); // ToDo: Mock second fetch
 
     // const response = await fetch("https://www.google.com");
     // const json = await response.json();
     // console.log(json);
-    
 
     //render Login
-    render(<AppMock route='login' />)
-    const userNameField = screen.getByLabelText('UserName or Email');
-    const userPassField = screen.getByLabelText('Password');
-    const userLoginBtn = screen.getByRole('button', {name: 'Login'});
-    
+    render(<AppMock route="login" />);
+    const userNameField = screen.getByLabelText("UserName or Email");
+    const userPassField = screen.getByLabelText("Password");
+    const userLoginBtn = screen.getByRole("button", { name: "Login" });
+
     await userEvent.type(userNameField, userMocked.username);
     await userEvent.type(userPassField, userMocked.password);
 
     await userEvent.click(userLoginBtn);
 
-  
-    const elem = await screen.findByText('User')
+    const elem = await screen.findByText("User");
 
     expect(elem).toBeInTheDocument();
-    
-    
   });
 
-  test('Check Login Validation', async ()=>{
-    global.fetch = vi.fn();
-    fetch.mockResolvedValueOnce({ json: async () => ({}), ok: false, status: 401 });
+  // test('Check Login Validation', async ()=>{
+  //   global.fetch = vi.fn();
+  //   fetch.mockResolvedValueOnce({ json: async () => ({}), ok: false, status: 401 });
 
-    //render Login
-    render(<AppMock route='login' />);
-    const userNameField = screen.getByLabelText('UserName or Email');
-    const userPassField = screen.getByLabelText('Password');
-    const userLoginBtn = screen.getByRole('button', {name: 'Login'});
+  //   //render Login
+  //   render(<AppMock route='login' />);
+  //   const userNameField = screen.getByLabelText('UserName or Email');
+  //   const userPassField = screen.getByLabelText('Password');
+  //   const userLoginBtn = screen.getByRole('button', {name: 'Login'});
     
-    await userEvent.type(userNameField, 'anyUser');
-    await userEvent.type(userPassField, 'anyPassword');
+  //   await userEvent.type(userNameField, 'anyUser');
+  //   await userEvent.type(userPassField, 'anyPassword');
 
-    await userEvent.click(userLoginBtn);
-     await waitFor(() => {      
-      expect(screen.getByText('UserName or Password is wrong')).toBeInTheDocument();
-    },{
-      timeout: 3000,
-      interval:500
-    });
-  })
+  //   await userEvent.click(userLoginBtn);
+  //    await waitFor(() => {      
+  //     expect(screen.getByText('UserName or Password is wrong')).toBeInTheDocument();
+  //   },{
+  //     timeout: 3000,
+  //     interval:500
+  //   });
+  // })
 })

@@ -8,6 +8,7 @@ import service from "../../service/service"
 import { login } from "../../features/authSlice"
 import { useDispatch} from "react-redux"
 import ChangePageTitle  from "../../hooks/ChangePageTitle"
+import { colorPalette } from "../../styles/colorPalette"
 
 const FormLoginContainer = styled.div`
   background: #22C1C3;
@@ -38,6 +39,7 @@ const Para = styled.p`
 `
 const StyledLink = styled(Link)`
   color: #FFF;
+  text-shadow: 1px 1px 1px ${colorPalette.black};
 `
 const ErrorBanner = styled.p`
   background: #bd2222ff;
@@ -76,6 +78,7 @@ export const Login = () => {
       },
       body: JSON.stringify(loginData)
     });
+    console.log("user::", user);
     if (user) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
       localStorage.setItem('user', user);
