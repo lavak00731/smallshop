@@ -7,7 +7,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom"
 import service from "../../service/service"
 import { login } from "../../features/authSlice"
 import { useDispatch} from "react-redux"
-import ChangePageTitle  from "../../hooks/ChangePageTitle"
+import useChangePageTitle  from "../../hooks/useChangePageTitle"
 import { colorPalette } from "../../styles/colorPalette"
 
 const FormLoginContainer = styled.div`
@@ -66,7 +66,7 @@ export const Login = () => {
       setLoginData(prev => ({ ...prev, [name]: value?.trim() }));
     }
   };
-  ChangePageTitle({pageTitle: 'Login - SmallShop'});
+  useChangePageTitle({pageTitle: 'Login - SmallShop'});
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
