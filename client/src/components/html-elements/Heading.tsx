@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo } from "react";
 import { fontStack } from "../../styles/fontStack";
 import styled from "styled-components";
 
@@ -37,29 +37,30 @@ const H6 = styled.h6`
   text-style: italic;
 `
 
-export const Heading = ({headingTag, text}:{headingTag:string, text:string}) => {
-  let element = null;    
+export const Heading = memo(({headingTag, text, idAttr}:{headingTag:string, text:string, idAttr?:string}) => {
+  let element = null; 
+  const idProps = idAttr ? { id: idAttr } : {};   
   switch (headingTag) {
           case 'h1':
-              element = <H1>{text}</H1>
+              element = <H1 { ...idProps }>{text}</H1>
               break;
           case 'h2':
-              element = <H2>{text}</H2>
+              element = <H2 { ...idProps }>{text}</H2>
               break;
           case 'h3':
-              element = <H3>{text}</H3>
+              element = <H3 { ...idProps }>{text}</H3>
               break;
           case 'h4':
-              element = <H4>{text}</H4>
+              element = <H4 { ...idProps }>{text}</H4>
               break;
           case 'h5':
-              element = <H5>{text}</H5>
+              element = <H5 { ...idProps }>{text}</H5>
               break;
           case 'h6':
-              element = <H6>{text}</H6>
+              element = <H6 { ...idProps }>{text}</H6>
               break;
           default:
               break;
     }
     return element;
-}
+})

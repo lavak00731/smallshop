@@ -8,6 +8,8 @@ const GridWrapper = styled.ul`
     grid-template-columns: 1fr;
     grid-template-row: 1fr;
     grid-gap: 1rem;
+    padding: 0;
+    list-style: none;
     ${media.md} {
         grid-template-columns: repeat(2, 1fr);
     }
