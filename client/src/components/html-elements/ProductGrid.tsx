@@ -20,6 +20,10 @@ const GridWrapper = styled.ul`
         grid-template-columns: repeat(4, 1fr);
     }
 `
+const ProdCardWrapper = styled.li`
+    display: flex;
+    
+`
 
 export const ProductGrid = ({productList}:{productList:ProductInterface[]}) => {
     if(productList.length === 0) {
@@ -29,9 +33,9 @@ export const ProductGrid = ({productList}:{productList:ProductInterface[]}) => {
     <GridWrapper>
         {
             productList.map((product:ProductInterface)=>{
-                return <li key={product.id}>
+                return <ProdCardWrapper key={product.id}>
                     <ProductCard product={product} />
-                </li>
+                </ProdCardWrapper>
             })
         }
     </GridWrapper>

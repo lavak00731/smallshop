@@ -59,7 +59,7 @@ export const RouterComp = () => {
       </p>
       <Routes>
         <Route index element={<Products />} />
-        <Route path={"product/:id"} element={ProductPage} />
+        <Route path={"product/:id"} element={<ProductPage />} />
         <Route path="login" element={<Login />} />
         <Route path="create-user" element={<CreateUser />} />
         <Route element={<Auth isTokenVerified={isTokenVerified} />}>
