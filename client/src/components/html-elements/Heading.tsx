@@ -6,21 +6,25 @@ const H1 = styled.h1`
   font-family: ${fontStack.titles};
   font-size: 2.8rem;
   line-height: 3rem;
+  margin-bottom: 1.5rem;
 `
 const H2 = styled.h2`
   font-family: ${fontStack.titles};
   font-size: 2.4rem;
   line-height: 2.6rem;
+  margin-bottom: 1.5rem;
 `
 const H3 = styled.h3`
   font-family: ${fontStack.titles};
   font-size: 2rem;
   line-height: 2.2rem;
+  margin-bottom: 1.5rem;
 `
 const H4 = styled.h4`
   font-family: ${fontStack.titles};
   font-size: 1.8rem;
   line-height: 2rem;
+  margin-bottom: 1.5rem;
 `
 const H5 = styled.h5`
   font-family: ${fontStack.titles};
@@ -28,6 +32,7 @@ const H5 = styled.h5`
   line-height: 2rem;
   font-weight: 700;
   text-transform: uppercase;
+  margin-bottom: 1.5rem;
 `
 const H6 = styled.h6`
   font-family: ${fontStack.titles};
@@ -35,6 +40,7 @@ const H6 = styled.h6`
   line-height: 2rem;
   font-weight: 800;
   text-style: italic;
+  margin-bottom: 1.5rem;
 `
 
 export const Heading = memo(({headingTag, text, idAttr}:{headingTag:string, text:string, idAttr?:string}) => {

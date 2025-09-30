@@ -22,9 +22,9 @@ const StarInnerWrapper = styled.div`
 `
 const RatingText = styled.p`
     font-family: ${fontStack.text};
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.5;
-    
+    text-align: right;    
 `
 
 export const Rating = ({rating, reviews}:{rating:number, reviews:number}) => {
@@ -33,7 +33,7 @@ export const Rating = ({rating, reviews}:{rating:number, reviews:number}) => {
         <StarWrapper>
             <StarInnerWrapper>
                 {Array.from({length: rate }).map((_, i) => (
-                    <Star key={Date.now()+i} color={colorPalette.white} strokeWidth={2} />
+                    <Star size="16" key={Date.now()+i} color={colorPalette.white} strokeWidth={2} />
                 ))}
             </StarInnerWrapper>
             <RatingText> <span className='sr-only'>Reviews</span>{ rating  } of 5 from { reviews  } reviews</RatingText>

@@ -9,6 +9,7 @@ import { Cart } from '../views/Private/Cart'
 import { Checkout } from '../views/Private/Checkout'
 import { Favourites } from '../views/Private/Favourites'
 import { User } from '../views/Private/User'
+import { ProductPage } from '../views/Public/ProductPage'
  
 
 export const RouterComp = () => {
@@ -32,11 +33,13 @@ export const RouterComp = () => {
       }
     );
     console.log("tokenVerified::", tokenVerified);
+    console.log("tokenVerified.valid::", tokenVerified?.valid);
     if (tokenVerified && tokenVerified.valid) {
       setisTokenVerified(tokenVerified.valid);
     } else {
       setisTokenVerified(false);
     }
+    console.log("isTokenVerified " ,isTokenVerified)
   };
 
   useEffect(() => {
@@ -56,6 +59,7 @@ export const RouterComp = () => {
       </p>
       <Routes>
         <Route index element={<Products />} />
+        <Route path={"product/:id"} element={ProductPage} />
         <Route path="login" element={<Login />} />
         <Route path="create-user" element={<CreateUser />} />
         <Route element={<Auth isTokenVerified={isTokenVerified} />}>

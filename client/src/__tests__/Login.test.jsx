@@ -35,11 +35,12 @@ describe('Login tests', () => {
   // });
   
   test('Check Login Redirection', async () => {
-    vi.spyOn(localStorage, "getItem").mockReturnValue("user-mocked-get");
     vi.spyOn(localStorage, "setItem").mockReturnValue(
-      "user-mocked",
+      "user",
       "dslfkjldskjdsflkdfsjlkjdlsf"
     );
+    //vi.spyOn(localStorage, "getItem").mockReturnValue("user-mocked-get");
+    
     // localStorage.getItem = vi.fn().mockReturnValue("user-mocked-get"); // Setup
     // localStorage.setItem = vi
     //   .fn()
@@ -53,6 +54,7 @@ describe('Login tests', () => {
     // localStorage.getItem("token"); // "user-mocked-get"
     // localStorage.getItem("token"); // "user-mocked-get"
     // localStorage.getItem("token"); // "user-mocked-get"
+
 
     window.fetch = vi.fn();
     fetch
