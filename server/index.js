@@ -86,8 +86,25 @@ server.post("/api/auth/verify", async (req, res) => {
     }
 })
 
+// server.use(middlewareVerifyToken);
+
+// server.get("/productos", middlewareVerifyToken, middlewareOtraCosa, () => {
+
+// })
+
 // [nodemon] watching extensions: js,mjs,cjs,json, .env
 
 server.listen(7575, () => { console.log('Server Working at 7575') })
 
 // mongodb, mongoose
+
+
+// Middleware
+// client -> middleware -> server
+
+// Envio de mails
+// nodemailer -> gmail
+
+// Autenticacion y Autorizacion -> AAA
+// jwt -> 
+// Auth 2.0 -> 

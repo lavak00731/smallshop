@@ -32,8 +32,9 @@ export const RouterComp = () => {
         body: JSON.stringify({ token }),
       }
     );
-    console.log("tokenVerified::", tokenVerified);
-    console.log("tokenVerified.valid::", tokenVerified?.valid);
+
+    console.log("tokenVerified::", tokenVerified); // true
+    // console.log("tokenVerified.valid::", tokenVerified?.valid);
     if (tokenVerified && tokenVerified.valid) {
       setisTokenVerified(tokenVerified.valid);
     } else {
@@ -52,6 +53,7 @@ export const RouterComp = () => {
     const pageTitle = document.title; // Or extract from route data
     setAnnouncement(`Navigated to ${pageTitle}`);
   }, [location]); // Update announcement when location changes
+
   return (
     <>
       <p aria-live="polite" className="sr-only">

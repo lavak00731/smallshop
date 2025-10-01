@@ -70,6 +70,9 @@ export const Login = () => {
 
   const formData = async (e:SubmitEvent) => {
     e.preventDefault();
+
+    console.log("Se ejecuto el submit");
+
     const user = await service('http://localhost:7575/api/auth/login', {
       method: 'post',
       headers: {
@@ -78,7 +81,9 @@ export const Login = () => {
       },
       body: JSON.stringify(loginData)
     });
+    
     console.log("user::", user);
+
     if (user) {
       const from = location.state?.from?.pathname || '/user'; // Default to /user-dashboard
       localStorage.setItem('user', user);
@@ -90,7 +95,6 @@ export const Login = () => {
       dispatch(login(false))
     }
   }
- 
   
   return (
     <FormLoginContainer>
