@@ -14,6 +14,7 @@ const CardWrapper = styled.div`
   position: relative;
   border: 2px solid ${colorPalette.decorative};
   border-radius: 0.5rem;
+  justify-content: space-between;
 `
 const ImgElem = styled.img` 
   max-width: 100%;
@@ -35,7 +36,7 @@ const ProdLink = styled(Link)`
   padding: 0.5rem;
   text-align: center;
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: none; 
   &:hover,
   &:focus-visible {
     background: ${colorPalette.white};
