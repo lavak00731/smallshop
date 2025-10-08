@@ -9,6 +9,7 @@ import type { ProductInterface } from '../../types/ProductInterface';
 import { useLocation } from 'react-router-dom';
 import { MainLayout } from '../../layouts/MainLayout';
 import styled from 'styled-components';
+import { fontStack } from '../../styles/fontStack';
 import { Heading } from '../../components/html-elements/Heading';
 
 const DataGrid = styled.div`
@@ -26,26 +27,47 @@ const Carousel = styled(Swiper)`
   width: 100%;
 `
 
+const Description = styled.p`
+  font-family: ${fontStack.text};
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+`
+
+const swiperModules = [Pagination, Keyboard, A11y, Navigation];
+
 const Product = () => {
   const location = useLocation();
   const product:ProductInterface = location.state?.product;
-  console.log(product);
+  // if product not passed via Link state, avoid runtime errors and show a message
+  if (!product) {
+    return (
+      <MainLayout>
+        <Heading headingTag={'h1'} text="Product not found" />
+      </MainLayout>
+    );
+  }
   return (
     <MainLayout>
       <DataGrid>
         <Column>
           <Heading headingTag={'h1'} text={product.title} />
           <Carousel
-            modules={[Pagination, Keyboard, A11y, Navigation]}
+            modules={swiperModules}
             pagination={{clickable: true}}
             spaceBetween={50}
             slidesPerView={1}   
             navigation
           >
             {
-              product.images.map( img => <SwiperSlide key={Date.now()}><img src={img} alt=""/></SwiperSlide>)
+              product.images.map((img, i) => (
+                // use stable key (index) or the image URL if unique
+                <SwiperSlide key={img ?? i}><img src={img} alt=""/></SwiperSlide>
+              ))
             }
           </Carousel>
+          <Description>{product.description}</Description>
+          
         </Column>
         <Column>
         

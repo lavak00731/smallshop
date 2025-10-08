@@ -2,6 +2,7 @@ import { Star } from 'lucide-react';
 import styled from 'styled-components';
 import { colorPalette } from '../../styles/colorPalette';
 import { fontStack } from '../../styles/fontStack';
+import { memo } from 'react';
 
 const StarWrapper = styled.div`
     background-color: ${colorPalette.black};
@@ -27,7 +28,7 @@ const RatingText = styled.p`
     text-align: right;    
 `
 
-export const Rating = ({rating, reviews}:{rating:number, reviews:number}) => {
+const RatingElem = ({rating, reviews}:{rating:number, reviews:number}) => {
    const rate = Math.round(rating);
    return (
         <StarWrapper>
@@ -40,3 +41,5 @@ export const Rating = ({rating, reviews}:{rating:number, reviews:number}) => {
         </StarWrapper>
    );
 }
+
+export const Rating = memo(RatingElem);
