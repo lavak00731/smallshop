@@ -45,14 +45,24 @@ const ProdLink = styled(Link)`
   }
 `
 
+const Price = styled.p`
+  font-family: ${fontStack.titles};
+  font-size: 1.2rem;
+  line-height: 1.5;
+  span {
+    font-weight: 700;
+  }
+`
+
 export const ProductCard = ({product}:{product:ProductInterface}) => {
   return (
     <CardWrapper>
-      <ImgElem src={ product.thumbnail } alt="" />
       <Heading headingTag={'h2'} text={ product.title }/>
+      <ImgElem src={ product.thumbnail } alt="" />      
       <Rating rating={ product.rating } reviews={ product.reviews.length } />
+      <Price>Price: <span>${product.price}</span></Price>
       <ProductDescription>{ product.description }</ProductDescription>
-      <ProdLink to={`product/${product.id}`} state={{product}}>See in details <span className="sr-only">{ product.title }</span></ProdLink>
+      <ProdLink to={`product/${product.id}`} state={{product}}>See in detail <span className="sr-only">{ product.title }</span></ProdLink>
     </CardWrapper>
   )
 }

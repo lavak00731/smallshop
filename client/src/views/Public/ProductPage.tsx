@@ -33,7 +33,14 @@ const Description = styled.p`
   line-height: 1.5;
   margin-bottom: 1rem;
 `
-
+const Price = styled.p`
+  font-family: ${fontStack.titles};
+  font-size: 1.2rem;
+  line-height: 1.5;
+  span {
+    font-weight: 700;
+  }
+`
 const swiperModules = [Pagination, Keyboard, A11y, Navigation];
 
 const Product = () => {
@@ -66,11 +73,12 @@ const Product = () => {
               ))
             }
           </Carousel>
-          <Description>{product.description}</Description>
           
+
         </Column>
         <Column>
-        
+            <Price>Price: <span>${product.price}</span></Price>
+            <Description>{product.description}</Description>
         </Column>
       </DataGrid>
       
