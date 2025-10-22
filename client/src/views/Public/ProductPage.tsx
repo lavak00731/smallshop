@@ -1,16 +1,12 @@
 import { memo } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Keyboard, A11y, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/a11y';
 import type { ProductInterface } from '../../types/ProductInterface';
 import { useLocation } from 'react-router-dom';
 import { MainLayout } from '../../layouts/MainLayout';
 import styled from 'styled-components';
 import { fontStack } from '../../styles/fontStack';
 import { Heading } from '../../components/html-elements/Heading';
+import { CarouselComp } from '../../components/html-elements/CarouselComp';
+import { Rating } from '../../components/html-elements/Rating';
 
 const DataGrid = styled.div`
   display: flex;
@@ -21,10 +17,6 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`
-
-const Carousel = styled(Swiper)`
-  width: 100%;
 `
 
 const Description = styled.p`
@@ -41,7 +33,7 @@ const Price = styled.p`
     font-weight: 700;
   }
 `
-const swiperModules = [Pagination, Keyboard, A11y, Navigation];
+
 
 const Product = () => {
   const location = useLocation();
@@ -58,32 +50,16 @@ const Product = () => {
     <MainLayout>
       <DataGrid>
         <Column>
-          <Heading headingTag={'h1'} text={product.title} />
-          <Carousel
-            modules={swiperModules}
-            pagination={{clickable: true}}
-            spaceBetween={50}
-            slidesPerView={1}   
-            navigation
-          >
-            {
-              product.images.map((img, i) => (
-                // use stable key (index) or the image URL if unique
-                <SwiperSlide key={img ?? i}><img src={img} alt=""/></SwiperSlide>
-              ))
-            }
-          </Carousel>
-          
-
+          <Heading headingTag={'h1'} text={product.title} /> 
+          {product.images.length > 1 ? <CarouselComp images={product.images}/> : <img src={product.thumbnail} alt="" />}              
         </Column>
         <Column>
             <Price>Price: <span>${product.price}</span></Price>
+            <Rating rating={product.rating} reviews={product.reviews.length} />
             <Description>{product.description}</Description>
         </Column>
-      </DataGrid>
-      
-    </MainLayout>
-    
+      </DataGrid>      
+    </MainLayout>    
   )
 }
 

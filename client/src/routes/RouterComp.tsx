@@ -19,7 +19,6 @@ export const RouterComp = () => {
 
   const tokenVerification = async () => {
     const token = localStorage.getItem("user");
-    console.log("token::", token); // "user-mocked-get"
 
     const tokenVerified = await service(
       "http://localhost:7575/api/auth/verify",

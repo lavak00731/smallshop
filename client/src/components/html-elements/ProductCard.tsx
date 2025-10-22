@@ -58,7 +58,7 @@ export const ProductCard = ({product}:{product:ProductInterface}) => {
   return (
     <CardWrapper>
       <Heading headingTag={'h2'} text={ product.title }/>
-      <ImgElem src={ product.thumbnail } alt="" />      
+      <ImgElem src={ product.thumbnail } alt="" />           
       <Rating rating={ product.rating } reviews={ product.reviews.length } />
       <Price>Price: <span>${product.price}</span></Price>
       <ProductDescription>{ product.description }</ProductDescription>
