@@ -1,5 +1,6 @@
-import { useId, useState } from "react";
+import { useId, useState, type MouseEventHandler, type ReactEventHandler } from "react";
 import styled from "styled-components";
+import { RatingStarSystem } from "./RatingStarSystem";
 import { type ReviewInterface } from "../../types/ReviewInterface";
 import { colorPalette } from "../../styles/colorPalette";
 import { fontStack } from "../../styles/fontStack";
@@ -9,6 +10,7 @@ const DropDownWrapper = styled.div`
   padding: 1rem;
   background: ${colorPalette.decorative};
   color: ${colorPalette.white};
+  text-align: center;
 `
 
 const Btn = styled.button`
@@ -22,32 +24,65 @@ const Btn = styled.button`
 `
 
 const ContentWrapper = styled.div`
-  padding: 1.5rem;
+  padding: 0.5rem;
   margin-top: 1rem;
-  background: ${colorPalette.white};
-  color: ${colorPalette.black};
+  background: ${colorPalette.black};
+  color: ${colorPalette.white};
   border-radius: 0.5rem;
+  &.hidden  {
+    display: none;
+  }
 `
 
 const ListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding: 0;
+`
+
+const ReviewText = styled.span`
+  font-family: ${fontStack.text};
+  line-height: 1.5;
+  font-weight: 600;
+  text-align: right;
+`
+
+const StarsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+`
+
+const ReviewWrapper = styled.li`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  list-style: none;
+  gap: 1rem;
 `
 
 export const ReviewDropDown = ({reviews, btntext}:{reviews:ReviewInterface[], btntext:string}) => {
     const idAttr = useId();
-    const [isExpanded, setIsExpanded] = useState(false)
+    const [isExpanded, setIsExpanded] = useState(false);
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setIsExpanded(!isExpanded);
+    }
   return (
     <DropDownWrapper>
-      <Btn type="button" aria-controls={idAttr} aria-expanded={isExpanded}>{ btntext }</Btn>
-      <ContentWrapper id={idAttr}>
+      <Btn onClick={handleClick} type="button" aria-controls={idAttr} aria-expanded={isExpanded}>{ btntext }</Btn>
+      <ContentWrapper id={idAttr} className={!isExpanded ? "hidden" : ""}>
         <ListWrapper>
           {
             reviews.map( (review, i) => (
-              <li key={i+Date.now()}>
-                
-              </li>
+              <ReviewWrapper key={i+Date.now()}>
+                <StarsWrapper>
+                  <RatingStarSystem rate={Math.round(review.rating)} />
+                </StarsWrapper>                
+                <ReviewText>{review.comment}</ReviewText>
+              </ReviewWrapper>
             ))
           }
         </ListWrapper>

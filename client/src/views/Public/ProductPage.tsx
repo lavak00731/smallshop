@@ -7,6 +7,7 @@ import { fontStack } from '../../styles/fontStack';
 import { Heading } from '../../components/html-elements/Heading';
 import { CarouselComp } from '../../components/html-elements/CarouselComp';
 import { Rating } from '../../components/html-elements/Rating';
+import { ReviewDropDown } from '../../components/html-elements/ReviewDropDown';
 
 const DataGrid = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ const Product = () => {
         <Column>
             <Price>Price: <span>${product.price}</span></Price>
             <Rating rating={product.rating} reviews={product.reviews.length} />
+            <ReviewDropDown reviews={product.reviews} btntext={'See All Reviews'} />
             <Description>{product.description}</Description>
         </Column>
       </DataGrid>      

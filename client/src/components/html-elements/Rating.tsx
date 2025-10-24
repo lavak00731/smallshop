@@ -1,8 +1,8 @@
-import { Star } from 'lucide-react';
 import styled from 'styled-components';
 import { colorPalette } from '../../styles/colorPalette';
 import { fontStack } from '../../styles/fontStack';
 import { memo } from 'react';
+import { RatingStarSystem } from './RatingStarSystem';
 
 const StarWrapper = styled.div`
     background-color: ${colorPalette.black};
@@ -33,9 +33,7 @@ const RatingElem = ({rating, reviews}:{rating:number, reviews:number}) => {
    return (
         <StarWrapper>
             <StarInnerWrapper>
-                {Array.from({length: rate }).map((_, i) => (
-                    <Star size="16" key={Date.now()+i} color={colorPalette.white} strokeWidth={2} />
-                ))}
+                <RatingStarSystem rate={rate} />
             </StarInnerWrapper>
             <RatingText> <span className='sr-only'>Reviews</span>{ rating  } of 5 from { reviews  } reviews</RatingText>
         </StarWrapper>
