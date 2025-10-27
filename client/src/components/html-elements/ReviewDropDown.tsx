@@ -20,11 +20,11 @@ const Btn = styled.button`
   font-weight: 700;
   border: 2px solid ${colorPalette.white};
   background: ${colorPalette.orange};
-  color: ${colorPalette.white}
+  color: ${colorPalette.white};
+  border-radius: 0.25rem;
 `
 
 const ContentWrapper = styled.div`
-  padding: 0.5rem;
   margin-top: 1rem;
   background: ${colorPalette.black};
   color: ${colorPalette.white};
@@ -38,7 +38,7 @@ const ListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 0;
+  padding: 1rem;
 `
 
 const ReviewText = styled.span`
@@ -62,13 +62,18 @@ const ReviewWrapper = styled.li`
   justify-content: space-between;
   list-style: none;
   gap: 1rem;
+  &:not(:last-child) {
+    border-bottom: 1px solid ${colorPalette.decorative};
+    padding-bottom: 1rem;
+  }
 `
 
 export const ReviewDropDown = ({reviews, btntext}:{reviews:ReviewInterface[], btntext:string}) => {
     const idAttr = useId();
     const [isExpanded, setIsExpanded] = useState(false);
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setIsExpanded(!isExpanded);
+      e.preventDefault();
+      setIsExpanded(!isExpanded);
     }
   return (
     <DropDownWrapper>
