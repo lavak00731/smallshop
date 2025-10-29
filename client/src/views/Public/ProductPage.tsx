@@ -9,17 +9,28 @@ import { CarouselComp } from '../../components/html-elements/CarouselComp';
 import { Rating } from '../../components/html-elements/Rating';
 import { ReviewDropDown } from '../../components/html-elements/ReviewDropDown';
 import { colorPalette } from '../../styles/colorPalette';
+import { ShoppingCart } from 'lucide-react';
+import { media } from '../../styles/breakpoints';
 
 const DataGrid = styled.div`
   display: flex;
   flex-direction: column;
+  ${media.lg} {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0 2rem;
+  }
 `
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`
+  ${media.lg} {
+    max-width: 50%;
+  }
+` 
 
 const MediaWrapper = styled.figure`
   position: relative;
@@ -56,6 +67,9 @@ const Price = styled.p`
   span {
     font-weight: 700;
   }
+  ${media.lg} {
+    font-size: 1.8rem;
+  }
 `
 
 const BrandContainer = styled.p`
@@ -65,6 +79,29 @@ const BrandContainer = styled.p`
   font-weight: 500;
   span {
     font-weight: 700;
+  }
+`
+
+const CTABtn = styled.button`
+  background: ${colorPalette.buttonlink};
+  color: ${colorPalette.white};
+  font-family: ${fontStack.text};
+  font-weight: 600;
+  padding: 1rem;
+  max-width: 300px;
+  border-radius: 0.25rem;
+  margin: 0 auto;
+  text-transform: capitalize;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  border: 2px solid transparent;
+  &:hover,
+  &:focus-visible {
+    border: 2px solid ${colorPalette.buttonlink};
+    color: ${colorPalette.buttonlink};
+    background: ${colorPalette.white};
   }
 `
 
@@ -92,7 +129,8 @@ const Product = () => {
         </Column>
         <Column>
             <Price>Price: <span>${product.price}</span></Price>
-            <Rating rating={product.rating} reviews={product.reviews.length} />            
+            <Rating rating={product.rating} reviews={product.reviews.length} />      
+            <CTABtn> <ShoppingCart /> Add to the cart <span className="sr-only">{ product.title }</span></CTABtn>      
             <ReviewDropDown reviews={product.reviews} btntext={'See All Reviews'} />
             <Description>{product.description}</Description>
         </Column>

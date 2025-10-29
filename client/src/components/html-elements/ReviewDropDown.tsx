@@ -22,6 +22,12 @@ const Btn = styled.button`
   background: ${colorPalette.orange};
   color: ${colorPalette.white};
   border-radius: 0.25rem;
+  &:hover,
+  &:focus-visible {
+    border: 2px solid ${colorPalette.orange};
+    color: ${colorPalette.orange};
+    background: ${colorPalette.white};
+  }
 `
 
 const ContentWrapper = styled.div`
